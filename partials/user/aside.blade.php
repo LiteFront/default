@@ -34,7 +34,7 @@
                         aria-expanded="true" aria-controls="userCollapse"><i class="las la-user-circle"></i>Users</a>
                     <div class="collapse" id="userCollapse">
                         <div class="dropdown-inner">
-                            <a class="dropdown-item" href="{{url('admin/roles/role')}}"><i
+                            <a class="dropdown-item" href="{{url('admin/role/role')}}"><i
                                     class="las la-lock-open"></i>Roles &amp; Permissions</a>
                             <a class="dropdown-item" href="{{url('admin/user/user')}}"><i
                                     class="las la-users"></i>Users</a>
