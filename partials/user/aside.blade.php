@@ -40,7 +40,7 @@
                                     class="las la-users"></i>Users</a>
                             <a class="dropdown-item" href="{{url('admin/user/client')}}"><i
                                     class="las la-user-tie"></i>Clients</a>
-                            <a class="dropdown-item" href="{{url('admin/teams/team')}}"><i
+                            <a class="dropdown-item" href="{{url('admin/team/team')}}"><i
                                     class="las la-user-lock"></i>Teams</a>
                         </div>
                     </div>
