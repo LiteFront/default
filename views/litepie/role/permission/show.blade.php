@@ -27,7 +27,7 @@
     ->method('PUT')
     ->action(guard_url('role/permission'. $data['id']))!!}
 
-    @include('role::permission.partial.entry', ['mode' => 'show'])
+    @include('litepie.role.permission.partial.entry', ['mode' => 'show'])
 
     {!!Form::close()!!}
 </div>

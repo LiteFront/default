@@ -26,7 +26,7 @@
     ->files('true')
     ->action(guard_url('role/permission'))!!}
 
-    @include('role::permission.partial.entry', ['mode' => 'create'])
+    @include('litepie.role.permission.partial.entry', ['mode' => 'create'])
 
     {!! Form::close() !!}
 </div>

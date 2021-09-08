@@ -35,7 +35,7 @@
     ->enctype('multipart/form-data')
     ->action(guard_url('role/permission/'. $data['id']))!!}
 
-    @include('role::permission.partial.entry', ['mode' => 'edit'])
+    @include('litepie.role.permission.partial.entry', ['mode' => 'edit'])
 
     {!!Form::close()!!}
 </div>
