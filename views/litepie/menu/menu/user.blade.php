@@ -1,14 +1,11 @@
- <ul class="nav">                       
 @foreach ($menus as $menu)
+    @if($menu->has_role)
     @if ($menu->hasChildren())
-    <li class="{{ $menu->active ?? '' }}">
-        <a href="{{trans_url($menu->url)}}" ><i class="material-icons">{{$menu->icon}}</i><p>{{$menu->name}}</p></a>
-        @include('menu::menu.sub.aside', array('menus' => $menu->getChildren()))
-    </li>
-    @else  
-    <li  class="{{ $menu->active ?? '' }}">
-        <a href="{{trans_url($menu->url)}}"><i class="material-icons" >{{$menu->icon}}</i><p>{{$menu->name}}</p></a>
-    </li>
+        @include('litepie.menu.menu.sub.user', array('menus' => $menu->getChildren()))
+    @else
+    <a class="nav-link {{ $menu->active ?? '' }}" href="{{trans_url($menu->url)}}" data-toggle="tooltip" data-placement="right" title="{{$menu->name}}">
+        <i class="{{ $menu->icon ?? 'fa fa-angle-double-right' }}"></i>
+    </a>
+    @endif
     @endif
 @endforeach
-</ul>

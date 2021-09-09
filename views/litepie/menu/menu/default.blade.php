@@ -6,7 +6,7 @@
                 <i class="{!! $menu->icon ?? '' !!}"></i> <span>{{$menu->name}}</span>
                 <b class="caret"></b>
             </a>
-            @include('menu::menu.sub.default', array('menus' => $children))
+            @include('litepie.menu.menu.sub.default', array('menus' => $children))
         </li>
         @else
         <li  class="{{ $menu->active ?? '' }}">
