@@ -13,8 +13,8 @@
                 <br />
                 <div class="profile-buttons">
                     <div class="mb-15">
-                        <a class="btn btn-theme" href="{{guard_url('profile')}}">Profile</a>
-                        <a class="btn btn-theme" href="{{guard_url('password')}}">Change Password</a>
+                        <a class="btn btn-theme" href="{{guard_url('profile')}}">{{trans('user.user.title.profile')}}</a>
+                        <a class="btn btn-theme" href="{{guard_url('password')}}">{{trans('user.user.title.change_password')}}</a>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="profile-edit-card">
                 <div class="app-sec-title app-sec-title-with-icon">
                     <i class="las la-cog app-sec-title-icon"></i>
-                    <h2>Change Password</h2>
+                    <h2>{{trans('user.user.title.change_password')}}</h2>
                 </div>
                 {!!Form::vertical_open()
                 ->id('form-change-password')
@@ -32,35 +32,35 @@
                 ->class('change-password')!!}
                 <div class="profile-edit-card-section">
                     <div class="form-group row">
-                        <label for="full-name" class="col-sm-3 col-form-label text-sm-right">Old Password</label>
+                        <label for="full-name" class="col-sm-3 col-form-label text-sm-right">{{trans('user.user.label.current_password')}}</label>
                         <div class="col-sm-9">
                             {!! Form::password('old_password')
-                            -> label(trans('user::user.label.current_password'))
-                            -> placeholder(trans('user::user.placeholder.current_password'))
+                            -> label(trans('user.user.label.current_password'))
+                            -> placeholder(trans('user.user.placeholder.current_password'))
                             ->raw()!!}
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="designation" class="col-sm-3 col-form-label text-sm-right">New Password</label>
+                        <label for="designation" class="col-sm-3 col-form-label text-sm-right">{{trans('user.user.label.new_password')}}</label>
                         <div class="col-sm-9">
                             {!! Form::password('password')
-                            -> label(trans('user::user.label.current_password'))
-                            -> placeholder(trans('user::user.placeholder.new_password'))
+                            -> label(trans('user.user.label.current_password'))
+                            -> placeholder(trans('user.user.placeholder.new_password'))
                             ->raw()!!}
                         </div>
                     </div>
                     <div class="form-group row mb-0">
-                        <label for="email" class="col-sm-3 col-form-label text-sm-right">Confirm Password</label>
+                        <label for="email" class="col-sm-3 col-form-label text-sm-right">{{trans('user.user.label.new_password_confirmation')}}</label>
                         <div class="col-sm-9">
                             {!! Form::password('password_confirmation')
-                            -> label(trans('user::user.label.new_password_confirmation'))
-                            -> placeholder(trans('user::user.placeholder.new_password_confirmation'))
+                            -> label(trans('user.user.label.new_password_confirmation'))
+                            -> placeholder(trans('user.user.placeholder.new_password_confirmation'))
                             ->raw()!!}
                         </div>
                     </div>
                 </div>
                 <div class="profile-edit-card-section text-center">
-                    <button class="btn btn-theme" type="submit">Change Password</button>
+                    <button class="btn btn-theme" type="submit">{{trans('user.user.title.change_password')}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>
