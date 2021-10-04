@@ -40,13 +40,13 @@
  */
 
 /*!
- * perfect-scrollbar v1.5.0
- * Copyright 2020 Hyunje Jun, MDBootstrap and Contributors
+ * perfect-scrollbar v1.5.2
+ * Copyright 2021 Hyunje Jun, MDBootstrap and Contributors
  * Licensed under MIT
  */
 
 /*!
-FullCalendar v5.8.0
+FullCalendar v5.9.0
 Docs & License: https://fullcalendar.io/
 (c) 2021 Adam Shaw
 */

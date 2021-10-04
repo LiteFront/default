@@ -39,6 +39,10 @@ $(function() {
     $(".header-search").toggleClass("open");
   });
 
+  $(".taggable").each(function() {
+    console.log($(this));
+  });
+
   $("input[type=html_editor]").summernote({
     height: "200px",
     toolbar: [
@@ -119,6 +123,10 @@ $(document).ajaxComplete(function() {
     });
 
   $("form[id$='-show'] :input").prop("disabled", true);
+
+  $(".taggable").each(function() {
+    console.log($(this));
+  });
 
   $(".html-editor-mini").summernote({
     height: "200px",
