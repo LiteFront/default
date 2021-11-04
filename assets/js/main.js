@@ -39,10 +39,6 @@ $(function() {
     $(".header-search").toggleClass("open");
   });
 
-  $(".taggable").each(function() {
-    console.log($(this));
-  });
-
   $("input[type=html_editor]").summernote({
     height: "200px",
     toolbar: [
@@ -124,10 +120,6 @@ $(document).ajaxComplete(function() {
 
   $("form[id$='-show'] :input").prop("disabled", true);
 
-  $(".taggable").each(function() {
-    console.log($(this));
-  });
-
   $(".html-editor-mini").summernote({
     height: "200px",
     toolbar: [
@@ -160,7 +152,6 @@ $(document).ajaxSuccess(function(event, xhr, settings) {
 class myApp {
   constructor() {}
   async curd(tag) {
-    console.log(tag);
     if (tag.data("action") == "SHOW") {
       return app.load(tag.data("load-to"), tag.data("url"));
     }
@@ -235,7 +226,6 @@ class myApp {
     let url = tag.data("url");
     let searchFrm = tag.data("search-form");
     let scrollDiv = tag.data("scroll-div");
-    console.log(scrollDiv);
     let asString = "";
     if ($(searchFrm).length) {
       const formData = new FormData();
@@ -249,7 +239,6 @@ class myApp {
       .off()
       .on("scroll", function() {
         asString = "&page=" + pageNo;
-        console.log(asString);
         if (stopLoading) return;
         let div = $(this).get(0);
         if (div.scrollTop + div.clientHeight >= div.scrollHeight) {
@@ -263,7 +252,6 @@ class myApp {
               if (html.trim() == "") stopLoading = true;
               tag[0].insertAdjacentHTML("beforeend", html);
               pageNo++;
-              console.log(pageNo);
             },
           });
         }
@@ -379,7 +367,6 @@ class myApp {
 
   async load(tag, target) {
     $(tag).load(target);
-    console.log(tag);
     $(tag).show();
   }
 

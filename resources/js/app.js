@@ -18,5 +18,3 @@ require('bootstrap-datepicker/dist/js/bootstrap-datepicker.js');
 require('jquery-validation/dist/jquery.validate.js');
 require('timeago/jquery.timeago.js');
 require('infinite-scroll/dist/infinite-scroll.pkgd.js');
-require('selectize/dist/js/selectize.js');
-

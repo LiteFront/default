@@ -29,7 +29,7 @@
                                     class="{{$module['icon'] ?? 'las la-ellipsis-h'}}"></i><span>{{$module['name']}}</span> </a>
                             @endforeach
                         </div>
-                        <button type="button" class="btn add-app-btn btn-icon btn-outline" data-action='CREATE'
+                        <button type="button" class="btn add-app-btn btn-icon btn-outline" id='btn-create' data-action='CREATE'
                             data-load-to="#app-entry" data-url="{{$form['urls']['create']['url'] ?? ''}}"> New <i
                                 class="las la-plus"></i>
                         </button>
@@ -38,7 +38,7 @@
                     <div class="app-list-toolbar">
                         <div class="app-list-pagination">
                             <div class="select-all-checkbox">
-                                <input type="checkbox" name="checkAll" id="checkAll">
+                                <input type="checkbox" name="tasks_list" id="checkAll">
                                 <label for="checkAll"></label>
                             </div>
                             <div class="header-search">
@@ -58,20 +58,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="app-detail-wrap" id="app-entry">
-                    <div class="app-detail-empty">
-                        <div class="empty-content">
-                            <img src="{{theme_asset('img/empty-select.png')}}" class="img-fluid" alt="Select an item to view details">
-                            <h3>Select an item to view details</h3>
-                            <p>Nothing is selected</p>
-                        </div>
-                    </div>
+                <div class="app-detail-wrap" id="app-entry" data-url="{{$form['urls']['new']['url'] ?? ''}}">
                 </div>
                 <script type="text/javascript">
                 $(function() {
                     let tag = $('#item-list');
                     tag.off().load(tag.data("url"));
                     app.doPageScroll(tag);
+                    let appEntry = $('#app-entry');
+                    appEntry.off().load(appEntry.data("url"));
                 });
                 </script>
             </div>
