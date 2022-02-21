@@ -17,7 +17,7 @@
 
 <body>
     <div class="app-wrap">
-        {!! Theme::partial('user.aside') !!}
+        {!! Theme::partial('aside') !!}
         <div class="app-content-wrap">
             <div class="app-list-wrap">
                 <div class="app-list-inner">
@@ -42,7 +42,7 @@
                                 <label for="checkAll"></label>
                             </div>
                             <div class="header-search">
-                                {!!Theme::partial('user.search', compact('form'))!!}
+                                {!!Theme::partial('search', compact('form'))!!}
                             </div>
                         </div>
                         <button type="button" class="btn delete-app-btn btn-icon btn-outline"><i
