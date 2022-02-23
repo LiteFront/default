@@ -57,8 +57,9 @@ return [
 
             //You may use this event to set up your assets.
 
-            $theme->asset()->usePath()->add('app', 'dist/css/app.css');
+            $theme->asset()->usePath()->add('vendor', 'dist/css/app.css');
             $theme->asset()->usePath()->add('settings', 'css/settings.css');
+            $theme->asset()->usePath()->add('main', 'css/app.css');
             $theme->asset()->usePath()->add('jquery', 'dist/js/jquery.min.js');
 
             $theme->asset()->container('footer')->usepath()->add('manifest', 'dist/js/manifest.js');
@@ -71,27 +72,6 @@ return [
         // Listen on event before render a layout,
         // this should call to assign style, script for a layout.
         'beforeRenderLayout' => [
-
-            'default' => function ($theme) {
-                $theme->asset()->usePath()->add('layout', 'css/public.css');
-            },
-
-            'home' => function ($theme) {
-                $theme->asset()->usePath()->add('layout', 'css/public.css');
-            },
-
-            'app' => function ($theme) {
-                $theme->asset()->usePath()->add('layout', 'css/app.css');
-            },
-
-            'user' => function ($theme) {
-                $theme->asset()->usePath()->add('layout', 'css/app.css');
-            },
-
-            'auth' => function ($theme) {
-                $theme->asset()->usePath()->add('layout', 'css/app.css');
-            },
-
         ],
 
     ],

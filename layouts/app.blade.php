@@ -17,7 +17,7 @@
 
 <body>
     <div class="app-wrap">
-        {!! Theme::partial('user.aside') !!}
+        {!! Theme::partial('aside') !!}
         <div class="app-content-wrap">
             <div class="app-list-wrap">
                 <div class="app-list-inner">
@@ -29,7 +29,7 @@
                                     class="{{$module['icon'] ?? 'las la-ellipsis-h'}}"></i><span>{{$module['name']}}</span> </a>
                             @endforeach
                         </div>
-                        <button type="button" class="btn add-app-btn btn-icon btn-outline" data-action='CREATE'
+                        <button type="button" class="btn add-app-btn btn-icon btn-outline" id='btn-create' data-action='CREATE'
                             data-load-to="#app-entry" data-url="{{$form['urls']['create']['url'] ?? ''}}"> New <i
                                 class="las la-plus"></i>
                         </button>
@@ -42,7 +42,7 @@
                                 <label for="checkAll"></label>
                             </div>
                             <div class="header-search">
-                                {!!Theme::partial('user.search', compact('form'))!!}
+                                {!!Theme::partial('search', compact('form'))!!}
                             </div>
                         </div>
                         <button type="button" class="btn delete-app-btn btn-icon btn-outline"><i
@@ -65,7 +65,7 @@
                     let tag = $('#item-list');
                     tag.off().load(tag.data("url"));
                     app.doPageScroll(tag);
-                    let appEntry = $('#appentry');
+                    let appEntry = $('#app-entry');
                     appEntry.off().load(appEntry.data("url"));
                 });
                 </script>

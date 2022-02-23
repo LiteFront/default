@@ -1,7 +1,7 @@
         <div class="app-items" id="item-list">
             <div class="app-list-header text-capitalize">
                 <a data-load-to="#app-list" data-url="{{guard_url('masters')}}" data-action="SHOW" style="cursor: pointer;">
-                    <i class="fas fa-arrow-left"></i> &nbsp;{{@$data[0]['type']}}
+                    <i class="fas fa-arrow-left"></i> &nbsp;{{$type}}
                 </a>
             </div>
 
@@ -23,3 +23,8 @@
                 @endforeach
             </div>
         </div>
+        <script type="text/javascript">
+        $(function() {
+            $('#btn-create').attr('data-url', "{{$form['urls']['create']['url'] . '/' . $type ?? ''}}");
+        });
+        </script>
