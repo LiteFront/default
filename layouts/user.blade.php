@@ -17,7 +17,7 @@
 
 <body>
     <div class="app-wrap">
-        {!! Theme::partial('user.aside') !!}
+        {!! Theme::partial('aside') !!}
         <div class="app-content-wrap">
             <div class="container-fluid">
                 {!! Theme::content() !!}

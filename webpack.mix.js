@@ -28,6 +28,7 @@ mix.js("resources/js/app.js", "assets/dist/js")
         "toastr",
         "sweetalert",
         "dropzone",
+        "summernote",
         "timeago",
         "jquery-validation"
     ])

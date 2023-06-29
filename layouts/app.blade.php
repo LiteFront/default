@@ -17,7 +17,7 @@
 
 <body>
     <div class="app-wrap">
-        {!! Theme::partial('user.aside') !!}
+        {!! Theme::partial('aside') !!}
         <div class="app-content-wrap">
             <div class="app-list-wrap">
                 <div class="app-list-inner">
@@ -29,24 +29,28 @@
                                     class="{{$module['icon'] ?? 'las la-ellipsis-h'}}"></i><span>{{$module['name']}}</span> </a>
                             @endforeach
                         </div>
-                        <button type="button" class="btn add-app-btn btn-icon btn-outline" data-action='CREATE'
+                        @if(isset($form['urls']['create']))
+                        <button type="button" class="btn add-app-btn btn-icon btn-outline" id='btn-create' data-action='CREATE'
                             data-load-to="#app-entry" data-url="{{$form['urls']['create']['url'] ?? ''}}"> New <i
                                 class="las la-plus"></i>
                         </button>
+                        @endif
                     </div>
-                    @if(isset($form))
+                    @if(isset($form['search']) && !empty($form['search']))
                     <div class="app-list-toolbar">
                         <div class="app-list-pagination">
                             <div class="select-all-checkbox">
-                                <input type="checkbox" name="tasks_list" id="checkAll">
-                                <label for="checkAll"></label>
+                                <input type="checkbox" name="check_all" id="check_all">
+                                <label for="check_all"></label>
                             </div>
                             <div class="header-search">
-                                {!!Theme::partial('user.search', compact('form'))!!}
+                                {!!Theme::partial('search', compact('form'))!!}
                             </div>
                         </div>
                         <button type="button" class="btn delete-app-btn btn-icon btn-outline"><i
-                                class="las la-trash"></i></button>
+                                class="las la-trash" 
+                                data-action="ACTIONS" data-list='#app-list' data-method='PATCH'
+                                data-href="{!!$form['urls']['list']['url']!!}/actions/delete"></i></button>
                     </div>
                     @endif
 
@@ -58,14 +62,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="app-detail-wrap" id="app-entry" data-url="{{$form['urls']['new']['url'] ?? ''}}">
+                @php
+                    if (isset($data['id']) && $data['id'] != '') {
+                        $url = @$form['urls']['list']['url'] . '/' . $data['id'];
+                    } else {
+                        $url = @$form['urls']['new']['url'];
+                    }
+                @endphp
+                <div class="app-detail-wrap" id="app-entry" data-url="{{$url}}">
                 </div>
+                
                 <script type="text/javascript">
                 $(function() {
                     let tag = $('#item-list');
-                    tag.off().load(tag.data("url"));
+                    tag.off().load(tag.data("url")+'?page=1&q={{request()->get('q')}}');
+                    @if(!empty($form['list']))
                     app.doPageScroll(tag);
-                    let appEntry = $('#appentry');
+                    @endif
+                    let appEntry = $('#app-entry');
                     appEntry.off().load(appEntry.data("url"));
                 });
                 </script>

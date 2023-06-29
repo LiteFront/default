@@ -3,7 +3,7 @@ Dropzone.autoDiscover = false;
 var pageNo = 2;
 var stopLoading = false;
 
-$(function() {
+$(function () {
   $('[data-toggle="tooltip"]').tooltip();
   toastr.options = {
     closeButton: true,
@@ -30,16 +30,16 @@ $(function() {
   jQuery.validator.setDefaults({
     debug: true,
     success: "valid",
-    errorPlacement: function(error, element) {
+    errorPlacement: function (error, element) {
       return true;
     },
   });
 
-  $(".search-btn").on("click", function() {
+  $(".search-btn").on("click", function () {
     $(".header-search").toggleClass("open");
   });
 
-  $("input[type=html_editor]").summernote({
+  $("textarea.html-editor").summernote({
     height: "200px",
     toolbar: [
       ["style", ["bold", "italic", "underline"]],
@@ -50,28 +50,33 @@ $(function() {
     ],
   });
 
-  $("input[type=html_editor]").summernote({
+  $("textarea.html-editor").summernote({
     height: "200px",
     onImageUpload: function(files, editor, welEditable) {
       app.sendFile(files[0], editor, welEditable);
     },
   });
 
-  $("body").on("click", "[data-action]", function(e) {
+  $(".header-search .dropdown-menu").click(function (e) {
+    e.stopPropagation();
+  });
+
+  $("body").on("click", "[data-action]", function (e) {
     e.preventDefault();
     e.stopPropagation();
     var tag = $(this);
-
     app.curd(tag);
   });
 
-  $(".dropdown .has-child").on("click", 'a[data-toggle="collapse"]', function(
-    event
-  ) {
-    event.preventDefault();
-    event.stopPropagation();
-    $($(this).attr("href")).collapse("toggle");
-  });
+  $(".dropdown .has-child").on(
+    "click",
+    'a[data-toggle="collapse"]',
+    function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      $($(this).attr("href")).collapse("toggle");
+    }
+  );
 
   if ($(".main-nav-wrap").length) {
     var ps = new PerfectScrollbar(".main-nav-wrap", {
@@ -90,7 +95,7 @@ $(function() {
   }
 
   var dropdownMenu;
-  $(window).on("show.bs.dropdown", function(e) {
+  $(window).on("show.bs.dropdown", function (e) {
     dropdownMenu = $(e.target).find(".main-nav-dropdown");
     $("body").append(dropdownMenu.detach());
     var eOffset = $(e.target).offset();
@@ -100,18 +105,19 @@ $(function() {
       left: eOffset.left + 63,
     });
   });
-  $(window).on("hide.bs.dropdown", function(e) {
+
+  $(window).on("hide.bs.dropdown", function (e) {
     $(e.target).append(dropdownMenu.detach());
     dropdownMenu.hide();
   });
 });
 
 /* ====== Ajax complete ======= */
-$(document).ajaxComplete(function() {
+$(document).ajaxComplete(function () {
   Dropzone.autoDiscover = false;
   $("body")
     .off()
-    .on("click", "[data-action]", function(e) {
+    .on("click", "[data-action]", function (e) {
       e.preventDefault();
       e.stopPropagation();
       var tag = $(this);
@@ -120,31 +126,34 @@ $(document).ajaxComplete(function() {
 
   $("form[id$='-show'] :input").prop("disabled", true);
 
-  $(".html-editor-mini").summernote({
+
+  $("textarea.html-editor").summernote({
     height: "200px",
     toolbar: [
-      ["style", ["bold", "italic", "underline", "clear"]],
+      ["style", ["bold", "italic", "underline"]],
       ["fontsize", ["fontsize"]],
       ["color", ["color"]],
       ["para", ["ul", "ol", "paragraph"]],
+      ["view", ["fullscreen", "codeview"]],
     ],
   });
 
-  $(".html-editor").summernote({
+  $("textarea.html-editor").summernote({
     height: "200px",
     onImageUpload: function(files, editor, welEditable) {
       app.sendFile(files[0], editor, welEditable);
     },
   });
+  
 });
 
 /* ====== Ajax error ======= */
-$(document).ajaxError(function(event, jqxhr, settings, thrownError) {
+$(document).ajaxError(function (event, jqxhr, settings, thrownError) {
   app.message(jqxhr);
 });
 
 /* ====== Ajax success ======= */
-$(document).ajaxSuccess(function(event, xhr, settings) {
+$(document).ajaxSuccess(function (event, xhr, settings) {
   app.message(xhr);
 });
 
@@ -153,7 +162,10 @@ class myApp {
   constructor() {}
   async curd(tag) {
     console.log(tag);
+    console.log(tag.data("action"), tag.data("method"), tag.data("href"));
+
     if (tag.data("action") == "SHOW") {
+      // history.pushState({}, tag.data("title"), tag.data("url"));
       return app.load(tag.data("load-to"), tag.data("url"));
     }
 
@@ -166,6 +178,7 @@ class myApp {
     }
 
     if (tag.data("action") == "EDIT") {
+      // history.pushState({}, tag.data("title"), tag.data("url"));
       return app.load(tag.data("load-to"), tag.data("url"));
     }
 
@@ -177,8 +190,12 @@ class myApp {
       return app.delete(tag);
     }
 
-    if (tag.data("action") == "REQUEST") {
-      return app.makeRequest(tag.data("method"), tag.data("href"));
+    if (tag.data("action") == "WORKFLOW" || tag.data("action") == "ACTION") {
+      return app.sendAction(tag);
+    }
+
+    if (tag.data("action") == "ACTIONS") {
+      return app.sendActions(tag);
     }
 
     app.load(tag.data("load-to"), tag.data("href"));
@@ -194,7 +211,7 @@ class myApp {
     var formData = new FormData($(forms));
     params = form.serializeArray();
 
-    $.each(params, function(i, val) {
+    $.each(params, function (i, val) {
       formData.append(val.name, val.value);
     });
 
@@ -210,7 +227,7 @@ class myApp {
       processData: false,
       contentType: false,
       dataType: "json",
-      success: function(data, textStatus, jqXHR) {
+      success: function (data, textStatus, jqXHR) {
         app.load(tag, data.redirect);
       },
     });
@@ -239,7 +256,7 @@ class myApp {
 
     $(scrollDiv)
       .off()
-      .on("scroll", function() {
+      .on("scroll", function () {
         asString = "&page=" + pageNo;
         console.log(asString);
         if (stopLoading) return;
@@ -251,7 +268,7 @@ class myApp {
             async: false,
 
             data: asString,
-            success: function(html) {
+            success: function (html) {
               if (html.trim() == "") stopLoading = true;
               tag[0].insertAdjacentHTML("beforeend", html);
               pageNo++;
@@ -273,12 +290,12 @@ class myApp {
     var formData = new FormData();
     var params = form.serializeArray();
 
-    $.each(params, function(i, val) {
+    $.each(params, function (i, val) {
       formData.append(val.name, val.value);
     });
 
     $.each($(forms + " .html-editor"), function(i, val) {
-      formData.append(val.name, $("#" + val.id).summernote("code"));
+        formData.append(val.name, $("#" + val.id).summernote("code"));
     });
 
     var url = form.attr("action");
@@ -293,7 +310,7 @@ class myApp {
       processData: false,
       contentType: false,
       dataType: "json",
-      success: function(result) {
+      success: function (result) {
         app.load(tag.data("load-to"), result.url);
         app.index(tag.data("list"));
       },
@@ -313,12 +330,12 @@ class myApp {
     var formData = new FormData();
     params = form.serializeArray();
 
-    $.each(params, function(i, val) {
+    $.each(params, function (i, val) {
       formData.append(val.name, val.value);
     });
 
     $.each($(forms + " .html-editor"), function(i, val) {
-      formData.append(val.name, $("#" + val.id).summernote("code"));
+        formData.append(val.name, $("#" + val.id).summernote("code"));
     });
 
     var url = form.attr("action");
@@ -333,7 +350,7 @@ class myApp {
       processData: false,
       contentType: false,
       dataType: "json",
-      success: function(result) {
+      success: function (result) {
         app.load(tag.data("load-to"), result.url);
         app.index(tag.data("list"));
       },
@@ -359,8 +376,8 @@ class myApp {
             processData: false,
             contentType: false,
             dataType: "json",
-            success: function(result) {
-              app.load(tag.data("load-to"), result.url);
+            success: function (result) {
+              $("#app-entry").html("");
               app.index(tag.data("list"));
             },
           });
@@ -387,10 +404,10 @@ class myApp {
       cache: false,
       contentType: false,
       processData: false,
-      success: function(objFile) {
+      success: function (objFile) {
         editor.summernote("insertImage", objFile.folder + objFile.file);
       },
-      error: function(jqXHR, textStatus, errorThrown) {},
+      error: function (jqXHR, textStatus, errorThrown) {},
     });
   }
 
@@ -401,9 +418,78 @@ class myApp {
     });
   }
 
+  sendAction(tag) {
+    var params;
+    var method = tag.data("method");
+    var target = tag.data("href");
+    var formData = new FormData();
+    var form = $(tag.data("form"));
+
+    if (Object.keys(form).length !== 0) {
+      if (form.valid() == false) {
+        toastr.error("Please enter valid information.", "Error");
+        return false;
+      }
+
+      params = form.serializeArray();
+
+      $.each(params, function (i, val) {
+        formData.append(val.name, val.value);
+      });
+    }
+    
+    formData.append('_method', method);
+
+    $.ajax({
+      url: target,
+      type: 'POST',
+      data: formData,
+      async: false,
+
+      cache: false,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (result) {
+        app.load(tag.data("load-to"), result.url);
+        app.index(tag.data("list"));
+      },
+    });
+  }
+
+  sendActions(tag) {
+    var method = tag.data("method");
+    var target = tag.data("href");
+    var list = tag.data("list");
+    var formData = new FormData();
+
+    $(list + ' input[type="checkbox"]').each(function (e) {
+      if (e.checked == true) {
+        formData.append(e.name, val.value);
+      }
+    });
+    formData.append('_method', method);
+
+    $.ajax({
+      url: target,
+      type: 'POST',
+      data: formData,
+      async: false,
+
+      cache: false,
+      processData: false,
+      contentType: false,
+      dataType: "json",
+      success: function (result) {
+        app.load(tag.data("load-to"), result.url);
+        app.index(tag.data("list"));
+      },
+    });
+  }
+
   prepareSearch(inputs) {
-    var search = '';
-    inputs.each(function() {
+    var search = "";
+    inputs.each(function () {
       var value = $(this).val();
       var name = $(this).attr("name");
       if (value != "undefined" && value != "" && name != "q") {
@@ -446,7 +532,7 @@ class myApp {
       msgType = "warning";
       msgTitle = info.statusText;
       response = jQuery.parseJSON(info.responseText);
-      $.each(response.errors, function(key, val) {
+      $.each(response.errors, function (key, val) {
         msgText += val + "<br>";
       });
     } else if (info.status >= 100 && info.status <= 199) {
@@ -477,14 +563,12 @@ var app = new myApp();
 
 /* ====== Window Scroll ======= */
 $(window)
-  .scroll(function() {
+  .scroll(function () {
     var scrollDistance = $(window).scrollTop();
-    $(".app-entry-form-section").each(function(i) {
+    $(".app-entry-form-section").each(function (i) {
       if ($(this).position().top <= scrollDistance) {
         $("#steps_nav a.step-item.active").removeClass("active");
-        $("#steps_nav a.step-item")
-          .eq(i)
-          .addClass("active");
+        $("#steps_nav a.step-item").eq(i).addClass("active");
       }
     });
   })

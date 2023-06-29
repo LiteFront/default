@@ -45,8 +45,8 @@
                         </div>
                     </div>
                 </div>
-                <a class="dropdown-item" href="{{url('admin/settings')}}"><i class="las la-cog"></i>Settings</a>
-                <a class="dropdown-item" href="{{url('admin/masters')}}"><i class="las la-dice-d20"></i>Masters</a>
+                <a class="dropdown-item" href="{{url('admin/setting/setting')}}"><i class="las la-cog"></i>Settings</a>
+                <a class="dropdown-item" href="{{url('admin/master/master')}}"><i class="las la-dice-d20"></i>Masters</a>
                 <a class="dropdown-item" href="{{url('admin/menu/menu')}}"><i class="las la-stream"></i>Menus</a>
                 @endif
                 <div class="dropdown-divider"></div>
