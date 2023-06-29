@@ -16,8 +16,7 @@
   ],
   "require": {
     "php": "^7.3|^8.0",
-    "composer/installers": "~2.0",
-    "league/flysystem-aws-s3-v3": "^1.0"
+    "composer/installers": "~2.0"
   },
   "config": {
     "allow-plugins": {
