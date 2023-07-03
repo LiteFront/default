@@ -11,13 +11,13 @@
         </svg>
     </a>
     <nav class="navbar nav main-nav-wrap m-t-0">
-        <a class="nav-link mt-0" href="#" data-toggle="tooltip" data-placement="right" title=""
+        <a class="nav-link mt-0" href="#" data-bs-toggle="tooltip" data-placement="right" title=""
             data-original-title="Notifications"><i class="las la-bell"></i></a>
         {{Menu::menu('admin')}}
     </nav>
     <nav class="navbar nav flex-column user-nav-wrap">
         <div class="dropdown user-dropdown dropright">
-            <button class="btn dropdown-toggle" type="button" id="user_dropdown" data-toggle="dropdown"
+            <button class="btn dropdown-toggle" type="button" id="user_dropdown" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">S</button>
             <div class="dropdown-menu" aria-labelledby="user_dropdown">
                 <a class="dropdown-item user-info" href="{{guard_url('profile')}}">
@@ -30,7 +30,7 @@
                 @if(user()->isAdmin())
                 <div class="dropdown-divider"></div>
                 <div class="dropdown has-child">
-                    <a class="dropdown-item has-child" data-toggle="collapse" href="#userCollapse" role="button"
+                    <a class="dropdown-item has-child" data-bs-toggle="collapse" href="#userCollapse" role="button"
                         aria-expanded="true" aria-controls="userCollapse"><i class="las la-user-circle"></i>Users</a>
                     <div class="collapse" id="userCollapse">
                         <div class="dropdown-inner">

@@ -12,13 +12,13 @@
         {!!Form::vertical_open()
         ->id('login')
         ->method('POST')!!}
-        <div class="form-group">
+        <div class="mb-3">
             {!! Form::email('email')
             ->required()
             ->raw() !!}
             <i class="las la-user-circle"></i>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             {!! Form::password('password')
             ->required()
             ->raw()!!}
@@ -26,16 +26,16 @@
         </div>
         <div class="row mt-20 mb-20">
             <div class="col text-left">
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="remember_me" checked>
-                    <label class="custom-control-label text-white" for="remember_me">Remember Me</label>
+                <div class="form-check form-switch">
+                    <input type="checkbox" class="form-check-input" id="remember_me" checked>
+                    <label class="form-check-label text-white" for="remember_me">Remember Me</label>
                 </div>
             </div>
             <div class="col text-right">
                 <a href="{{guard_url('password/reset')}}">Forgot Password ?</a>
             </div>
         </div>
-        <div class="sign-btn text-center">
+        <div class="sign-btn">
             <button type="submit" class="btn btn-theme btn-block">Sign In</button>
         </div>
         {!! Form::close() !!}

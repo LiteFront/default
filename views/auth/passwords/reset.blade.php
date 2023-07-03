@@ -15,19 +15,19 @@
         ->method('POST')!!}
         <input type="hidden" name="token" value="{{ $token }}">
 
-        <div class="form-group">
+        <div class="mb-3">
             {!! Form::email('email')
             ->required()
             ->raw() !!}
             <i class="las la-user-circle"></i>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             {!! Form::password('password')
             ->required()
             ->raw()!!}
             <i class="las la-key"></i>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
             {!! Form::password('password_confirmation')
             ->required()
             ->raw()!!}

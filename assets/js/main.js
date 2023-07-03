@@ -294,9 +294,9 @@ class myApp {
       formData.append(val.name, val.value);
     });
 
-    $.each($(forms + " .html-editor"), function(i, val) {
-        formData.append(val.name, $("#" + val.id).summernote("code"));
-    });
+    // $.each($(forms + " .html-editor"), function(i, val) {
+    //     formData.append(val.name, $("#" + val.id).summernote("code"));
+    // });
 
     var url = form.attr("action");
 
@@ -334,9 +334,9 @@ class myApp {
       formData.append(val.name, val.value);
     });
 
-    $.each($(forms + " .html-editor"), function(i, val) {
-        formData.append(val.name, $("#" + val.id).summernote("code"));
-    });
+    // $.each($(forms + " .html-editor"), function(i, val) {
+    //     formData.append(val.name, $("#" + val.id).summernote("code"));
+    // });
 
     var url = form.attr("action");
 

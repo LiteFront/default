@@ -13,7 +13,7 @@
         ->id('reset')
         ->action(guard_url('password/email'))
         ->method('POST')!!}
-        <div class="form-group">
+        <div class="mb-3">
             {!! Form::email('email')
             ->required()
             ->placeholder('Enter your email')
@@ -21,14 +21,11 @@
             <i class="las la-user-circle"></i>
         </div>
         <div class="row mt-20 mb-20">
-            <div class="col text-left">
-
-            </div>
             <div class="col text-right">
                 <a href="{{guard_url('login')}}">Bac to login!</a>
             </div>
         </div>
-        <div class="sign-btn text-center">
+        <div class="sign-btn">
             <button type="submit" class="btn btn-theme btn-block">Send Reset Link!</button>
         </div>
         {!! Form::close() !!}
