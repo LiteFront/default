@@ -1,9 +1,9 @@
 <div class="col-xl-7 col-lg-6 col-md-5 p-0 d-md-block d-lg-block d-sm-none d-none">
     <div class="auth-bg-img" style="background-image: url('{{theme_asset('img/login-bg.png')}}')"></div>
 </div>
-<div class="col-xl-5 col-lg-6 col-md-7 my-auto p-0 ">
+<div class="col-xl-5 col-lg-6 col-md-7 my-auto p-0 authentication-form-block">
     <div class="authentication-form mx-auto">
-        <div class="text-left mb-30">
+        <div class="text-start mb-30">
             <a href="#" class="auth-logo"><img src="{{theme_asset('img/logo/logo.svg')}}" alt=""></a>
         </div>
         <h3>Welcome!</h3>
@@ -25,13 +25,13 @@
             <i class="las la-key"></i>
         </div>
         <div class="row mt-20 mb-20">
-            <div class="col text-left">
+            <div class="col text-start">
                 <div class="form-check form-switch">
                     <input type="checkbox" class="form-check-input" id="remember_me" checked>
                     <label class="form-check-label text-white" for="remember_me">Remember Me</label>
                 </div>
             </div>
-            <div class="col text-right">
+            <div class="col text-end">
                 <a href="{{guard_url('password/reset')}}">Forgot Password ?</a>
             </div>
         </div>

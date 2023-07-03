@@ -5,7 +5,7 @@
                 <img src="{{theme_asset('img/logo/public.svg')}}" class="img-fluid" alt="">
             </a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="{{url('/')}}">Home</a>
                     </li>
